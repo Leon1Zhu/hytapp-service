@@ -59,7 +59,6 @@ public class SubscribeUserService {
         System.out.println(pre1);
         String sql = "SELECT  a.*,COUNT(*) AS usercount FROM subscribe_user a  WHERE a.`subscribe_time`<='"+pre1+"' AND a.pro_name = '"+proName+"' AND a.`subscribe_time`>= '"+last7+"'   GROUP BY DATE_FORMAT(a.`subscribe_time`,'%Y-%m-%d')";
         List list = jdbcTemplate.queryForList(sql);
-
         return list;
     }
 

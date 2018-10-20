@@ -62,9 +62,20 @@ public class HytHouse {
     @Column(name = "create_time")
     private Date createTime;
 
+    @Column(name = "house_name")
+    private String houseName;
+
 
     public String getId() {
         return id;
+    }
+
+    public String getHouseName() {
+        return houseName;
+    }
+
+    public void setHouseName(String houseName) {
+        this.houseName = houseName;
     }
 
     public void setId(String id) {
