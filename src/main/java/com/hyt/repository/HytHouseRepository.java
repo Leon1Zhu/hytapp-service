@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HytHouseRepository extends JpaRepository<HytHouse,Long> {
+    HytHouse findOneById(String id);
 }
