@@ -12,5 +12,5 @@ import java.util.List;
 public interface HytHouseRepository extends JpaRepository<HytHouse,Long> {
     HytHouse findOneById(String id);
 
-    List findGuessLikeHouseByIsLike(Boolean islike);
+    Page findGuessLikeHouseByIsLike(Boolean islike, Pageable pageable);
 }

@@ -4,11 +4,13 @@ import com.alibaba.fastjson.JSONObject;
 import com.hyt.domain.HytHouse;
 import com.hyt.repository.HytHouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class HytHouseService {
@@ -25,13 +27,20 @@ public class HytHouseService {
         return hytHouse;
     }
 
-    public List searchHouse(JSONObject obj, Pageable pageable){
+    public JSONObject searchHouse(JSONObject obj, Pageable pageable){
+      int start = pageable.getPageNumber() * pageable.getPageSize();
+      int end =  start + pageable.getPageSize();
+      JSONObject result = new JSONObject();
       String sqlTotal = "SELECT count(*) total FROM hyt_house a WHERE 1 = 1 ";
       String sql = "SELECT * FROM hyt_house a WHERE 1 = 1 ";
       HytHouseService hytHouseService = new HytHouseService();
       sql = hytHouseService.pjSql(sql, obj);
+      sql += " Limit "+start+", "+end+" ";
       sqlTotal = hytHouseService.pjSql(sqlTotal, obj);
-      List result = jdbcTemplate.queryForList(sql);
+      List resultList = jdbcTemplate.queryForList(sql);
+      Map totalMap = jdbcTemplate.queryForMap(sqlTotal);
+      result.put("result", resultList);
+      result.put("total", totalMap);
       return result;
     }
 
@@ -61,7 +70,7 @@ public class HytHouseService {
         return sql;
     }
 
-    public List searchGuessLike() {
-        return hytHouseRepository.findGuessLikeHouseByIsLike(true);
+    public Page searchGuessLike(Pageable pageable) {
+        return hytHouseRepository.findGuessLikeHouseByIsLike(true, pageable);
     }
 }
