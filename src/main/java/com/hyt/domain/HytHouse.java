@@ -2,6 +2,8 @@ package com.hyt.domain;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "hyt_house")
@@ -65,6 +67,28 @@ public class HytHouse {
     @Column(name = "house_name")
     private String houseName;
 
+    @OneToMany(cascade = {CascadeType.ALL})
+    private List<HytHouseAdvantage> Advantage;
+
+    @OneToMany(cascade = {CascadeType.ALL})
+    private List<hytHouseType> Type;
+
+
+    public List<HytHouseAdvantage> getAdvantage() {
+        return Advantage;
+    }
+
+    public void setAdvantage(List<HytHouseAdvantage> advantage) {
+        Advantage = advantage;
+    }
+
+    public List<hytHouseType> getType() {
+        return Type;
+    }
+
+    public void setType(List<hytHouseType> type) {
+        Type = type;
+    }
 
     public String getId() {
         return id;

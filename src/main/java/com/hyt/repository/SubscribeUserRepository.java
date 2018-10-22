@@ -15,8 +15,4 @@ public interface SubscribeUserRepository extends JpaRepository<SubscribeUser,Str
     SubscribeUser findUserByUserPhoneAndProName(String phone,String proName);
 
     Page<SubscribeUser> findUserByProNameOrderBySubscribeTimeDesc(String proName,Pageable pageable);
-
-
-
-
 }
