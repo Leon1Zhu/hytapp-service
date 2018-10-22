@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * Created by zhuliang on 2017/6/9.
  */
 @Repository
-public interface SubscribeUserRepository extends JpaRepository<SubscribeUser,Long>{
+public interface SubscribeUserRepository extends JpaRepository<SubscribeUser,String>{
     SubscribeUser findUserByUserPhoneAndProName(String phone,String proName);
 
     Page<SubscribeUser> findUserByProNameOrderBySubscribeTimeDesc(String proName,Pageable pageable);

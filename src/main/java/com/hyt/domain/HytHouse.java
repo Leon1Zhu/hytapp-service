@@ -17,7 +17,7 @@ public class HytHouse {
     private Boolean isRecommend;
 
     @Column(name = "is_like")
-    private Boolean isLike;
+    private Boolean like;
 
     @Column(name = "is_highquality")
     private Boolean isHighquality;
@@ -91,11 +91,11 @@ public class HytHouse {
     }
 
     public Boolean getLike() {
-        return isLike;
+        return like;
     }
 
     public void setLike(Boolean like) {
-        isLike = like;
+        like = like;
     }
 
     public Boolean getHighquality() {

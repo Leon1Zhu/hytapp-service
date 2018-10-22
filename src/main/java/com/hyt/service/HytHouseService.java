@@ -16,11 +16,12 @@ import java.util.Map;
 public class HytHouseService {
     @Autowired
     private HytHouseRepository hytHouseRepository;
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     public HytHouse getHouseById(String id) throws Exception{
-        HytHouse hytHouse = hytHouseRepository.findOneById(id);
+        HytHouse hytHouse = hytHouseRepository.findOne(id);
         if (hytHouse == null) {
             throw new Exception("不存在该楼盘信息");
         }
@@ -45,23 +46,23 @@ public class HytHouseService {
     }
 
     public String pjSql(String sql, JSONObject obj) {
-        if (!"".equals(obj.getString("houseName"))) {
+        if (!(null == obj.getString("houseName"))) {
             sql += "  AND a.`house_name` = '"+obj.getString("houseName")+"' ";
         }
 
-        if (!"".equals(obj.getString("regin"))) {
+        if (!(null== obj.getString("regin"))) {
             sql += "  AND a.`regin` = '" +obj.getString("regin")+ "' ";
         }
 
-        if (!"".equals(obj.getString("building_type"))) {
+        if (!(null == obj.getString("building_type"))) {
             sql += "  AND a.`building_type` = '" +obj.getString("building_type")+ "' ";
         }
 
-        if (!"".equals(obj.getString("house_type"))) {
+        if (!(null == obj.getString("house_type"))) {
             sql += "  AND a.`housetype` = '" +obj.getString("house_type")+ "' ";
         }
 
-        if (!"".equals(obj.getString("price"))) {
+        if (! (null == obj.getString("price")) ) {
             String price = obj.getString("price");
             String[] prices = price.split("-");
             sql += "  AND a.`price` <= '" +prices[0]+ "' ";
@@ -71,6 +72,6 @@ public class HytHouseService {
     }
 
     public Page searchGuessLike(Pageable pageable) {
-        return hytHouseRepository.findGuessLikeHouseByIsLike(true, pageable);
+        return hytHouseRepository.findByLike(true, pageable);
     }
 }
