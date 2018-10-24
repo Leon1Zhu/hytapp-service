@@ -34,8 +34,8 @@ public class HytHouseController {
     @GetMapping("/getSelectedHouse")
     public ResponseEntity getSelectedHouse(@RequestParam Map searchobj, @RequestParam int index, @RequestParam int length){
         try {
-            Pageable pageable = new PageRequest(index,length);
-            return ResponseEntity.ok().body(hytHouseService.searchHouse(new JSONObject(searchobj), pageable));
+            Pageable pageable = new PageRequest(Integer.parseInt(searchobj.get("index").toString()), Integer.parseInt(searchobj.get("length").toString()));
+            return ResponseEntity.ok().body(hytHouseService.searchHouse(JSONObject.parseObject(searchobj.get("searchobj").toString()), pageable));
         }catch (Exception e){
             e.printStackTrace();
             ExecResult er=new ExecResult(false,e.getMessage());
@@ -44,9 +44,8 @@ public class HytHouseController {
     }
 
     @GetMapping("/getLikeHouse")
-    public ResponseEntity getLikeHouse( @RequestParam int index, @RequestParam int length){
+    public ResponseEntity getLikeHouse( Pageable pageable){
         try {
-            Pageable pageable = new PageRequest(index,length);
             return ResponseEntity.ok().body(hytHouseService.searchGuessLike(pageable));
         }catch (Exception e){
             e.printStackTrace();
