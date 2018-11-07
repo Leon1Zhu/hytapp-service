@@ -53,4 +53,15 @@ public class HytHouseController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(er);
         }
     }
+
+    @GetMapping("/getGoodHouse")
+    public ResponseEntity getGoodHouse( Pageable pageable){
+        try {
+            return ResponseEntity.ok().body(hytHouseService.searchGoodHouse(pageable));
+        }catch (Exception e){
+            e.printStackTrace();
+            ExecResult er=new ExecResult(false,e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(er);
+        }
+    }
 }

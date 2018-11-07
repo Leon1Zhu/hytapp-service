@@ -62,7 +62,7 @@ public class HytHouseService {
             sql += "  AND a.`housetype` = '" +obj.getString("house_type")+ "' ";
         }
 
-        if (! (null == obj.getString("price")) ) {
+        if ((! (null == obj.getString("price")) && "不限".equals(obj.getString("price")))  ) {
             String price = obj.getString("price");
             String[] prices = price.split("-");
             sql += "  AND a.`price` <= '" +prices[0]+ "' ";
@@ -73,5 +73,9 @@ public class HytHouseService {
 
     public Page searchGuessLike(Pageable pageable) {
         return hytHouseRepository.findByLike(true, pageable);
+    }
+
+    public Page searchGoodHouse(Pageable pageable) {
+        return hytHouseRepository.findByIsRecommend(true, pageable);
     }
 }

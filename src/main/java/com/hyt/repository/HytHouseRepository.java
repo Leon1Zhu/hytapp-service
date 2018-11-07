@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface HytHouseRepository extends JpaRepository<HytHouse,String> {
     Page<HytHouse> findByLike(Boolean Islike, Pageable pageable);
+    Page<HytHouse> findByIsRecommend(Boolean isRecommend, Pageable pageable);
 }
