@@ -15,4 +15,5 @@ public class HytSubscribeService {
     public List getAllSubscribeService() {
         return hytSubscribeRepository.findAll();
     }
+
 }
