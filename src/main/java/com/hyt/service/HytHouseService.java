@@ -41,7 +41,7 @@ public class HytHouseService {
       List resultList = jdbcTemplate.queryForList(sql);
       Map totalMap = jdbcTemplate.queryForMap(sqlTotal);
       result.put("result", resultList);
-      result.put("total", totalMap);
+      result.put("total", totalMap.get("total"));
       return result;
     }
 
