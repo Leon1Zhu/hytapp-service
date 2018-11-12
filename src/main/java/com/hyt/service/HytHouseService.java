@@ -32,16 +32,15 @@ public class HytHouseService {
       int start = pageable.getPageNumber() * pageable.getPageSize();
       int end =  start + pageable.getPageSize();
       JSONObject result = new JSONObject();
-      String sqlTotal = "SELECT count(*) total FROM hyt_house a , hyt_house_type b WHERE 1 = 1 ";
-      String sql = "SELECT * FROM hyt_house a , hyt_house_type b WHERE 1 = 1 ";
+      String sql = "SELECT a.* FROM hyt_house a  LEFT JOIN hyt_house_type b  ON a.`id` = b.`hyt_house_id` WHERE 1 = 1  ";
       HytHouseService hytHouseService = new HytHouseService();
       sql = hytHouseService.pjSql(sql, obj);
+      sql += " GROUP BY a.id ";
+      List totalResult = jdbcTemplate.queryForList(sql);
       sql += " Limit "+start+", "+end+" ";
-      sqlTotal = hytHouseService.pjSql(sqlTotal, obj);
       List resultList = jdbcTemplate.queryForList(sql);
-      Map totalMap = jdbcTemplate.queryForMap(sqlTotal);
       result.put("result", resultList);
-      result.put("total", totalMap.get("total"));
+      result.put("total", totalResult.size());
       return result;
     }
 
@@ -55,11 +54,11 @@ public class HytHouseService {
         }
 
         if (!(null == obj.getJSONObject("building_type"))) {
-            sql += "  AND a.`building_type` = '" +obj.getJSONObject("building_type").getString("data")+ "' ";
+            sql += "  AND a.`building_type` like '%"+obj.getJSONObject("building_type").getString("data")+"%' ";
         }
 
         if (!(null == obj.getJSONObject("house_type"))) {
-            sql += "  AND a.`housetype` = '" +obj.getJSONObject("house_type").getString("data")+ "' ";
+            sql += "  AND b.`type_direction` like '%"+obj.getJSONObject("house_type").getString("data")+"%' ";
         }
         if (! (null == obj.getString("price") || "不限".equals(obj.getJSONObject("price").getString("data")))) {
             String price = obj.getJSONObject("price").getString("data");
