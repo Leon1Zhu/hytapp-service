@@ -46,27 +46,26 @@ public class HytHouseService {
     }
 
     public String pjSql(String sql, JSONObject obj) {
-        if (!(null == obj.getString("houseName"))) {
-            sql += "  AND a.`house_name` = '"+obj.getString("houseName")+"' ";
+        if (!(null == obj.getJSONObject("houseName"))) {
+            sql += "  AND a.`house_name` = '"+obj.getJSONObject("houseName").getString("data")+"' ";
         }
 
-        if (!(null== obj.getString("regin"))) {
-            sql += "  AND a.`regin` = '" +obj.getString("regin")+ "' ";
+        if (!(null== obj.getJSONObject("regin"))) {
+            sql += "  AND a.`regin` = '" +obj.getJSONObject("regin").getString("data")+ "' ";
         }
 
-        if (!(null == obj.getString("building_type"))) {
-            sql += "  AND a.`building_type` = '" +obj.getString("building_type")+ "' ";
+        if (!(null == obj.getJSONObject("building_type"))) {
+            sql += "  AND a.`building_type` = '" +obj.getJSONObject("building_type").getString("data")+ "' ";
         }
 
-        if (!(null == obj.getString("house_type"))) {
-            sql += "  AND a.`housetype` = '" +obj.getString("house_type")+ "' ";
+        if (!(null == obj.getJSONObject("house_type"))) {
+            sql += "  AND a.`housetype` = '" +obj.getJSONObject("house_type").getString("data")+ "' ";
         }
-
-        if ((! (null == obj.getString("price")) && "不限".equals(obj.getString("price")))  ) {
-            String price = obj.getString("price");
+        if (! (null == obj.getString("price") || "不限".equals(obj.getJSONObject("price").getString("data")))) {
+            String price = obj.getJSONObject("price").getString("data");
             String[] prices = price.split("-");
-            sql += "  AND a.`price` <= '" +prices[0]+ "' ";
-            sql += "  AND a.`price` >= '" +prices[1]+ "' ";
+            sql += "  AND a.`price` >= '" +prices[0]+ "' ";
+            sql += "  AND a.`price` <= '" +prices[1]+ "' ";
         }
         return sql;
     }
