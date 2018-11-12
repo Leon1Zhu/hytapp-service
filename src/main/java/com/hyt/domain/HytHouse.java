@@ -67,12 +67,22 @@ public class HytHouse {
     @Column(name = "house_name")
     private String houseName;
 
+    @Column(name = "house_tel")
+    private String houseTel;
+
     @OneToMany(cascade = {CascadeType.ALL})
     private List<HytHouseAdvantage> Advantage;
 
     @OneToMany(cascade = {CascadeType.ALL})
     private List<hytHouseType> Type;
 
+    public String getHouseTel() {
+        return houseTel;
+    }
+
+    public void setHouseTel(String houseTel) {
+        this.houseTel = houseTel;
+    }
 
     public List<HytHouseAdvantage> getAdvantage() {
         return Advantage;
