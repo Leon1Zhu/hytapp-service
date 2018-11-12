@@ -32,8 +32,8 @@ public class HytHouseService {
       int start = pageable.getPageNumber() * pageable.getPageSize();
       int end =  start + pageable.getPageSize();
       JSONObject result = new JSONObject();
-      String sqlTotal = "SELECT count(*) total FROM hyt_house a WHERE 1 = 1 ";
-      String sql = "SELECT * FROM hyt_house a WHERE 1 = 1 ";
+      String sqlTotal = "SELECT count(*) total FROM hyt_house a , hyt_house_type b WHERE 1 = 1 ";
+      String sql = "SELECT * FROM hyt_house a , hyt_house_type b WHERE 1 = 1 ";
       HytHouseService hytHouseService = new HytHouseService();
       sql = hytHouseService.pjSql(sql, obj);
       sql += " Limit "+start+", "+end+" ";
@@ -64,8 +64,8 @@ public class HytHouseService {
         if (! (null == obj.getString("price") || "不限".equals(obj.getJSONObject("price").getString("data")))) {
             String price = obj.getJSONObject("price").getString("data");
             String[] prices = price.split("-");
-            sql += "  AND a.`price` >= '" +prices[0]+ "' ";
-            sql += "  AND a.`price` <= '" +prices[1]+ "' ";
+            sql += "  AND a.`price` >= " +prices[0]+ " ";
+            sql += "  AND a.`price` <= " +prices[1]+ " ";
         }
         return sql;
     }
