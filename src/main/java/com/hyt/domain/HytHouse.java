@@ -70,11 +70,26 @@ public class HytHouse {
     @Column(name = "house_tel")
     private String houseTel;
 
+    @Column(name = "house_order_number")
+    private String houseOrderNumber;
+
     @OneToMany(cascade = {CascadeType.ALL})
     private List<HytHouseAdvantage> Advantage;
 
     @OneToMany(cascade = {CascadeType.ALL})
     private List<hytHouseType> Type;
+
+    @OneToMany(cascade = {CascadeType.ALL})
+    private List<hytHouseType> imgs;
+
+
+    public String getHouseOrderNumber() {
+        return houseOrderNumber;
+    }
+
+    public void setHouseOrderNumber(String houseOrderNumber) {
+        this.houseOrderNumber = houseOrderNumber;
+    }
 
     public String getHouseTel() {
         return houseTel;
