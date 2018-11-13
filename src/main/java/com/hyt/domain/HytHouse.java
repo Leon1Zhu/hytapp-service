@@ -80,8 +80,15 @@ public class HytHouse {
     private List<hytHouseType> Type;
 
     @OneToMany(cascade = {CascadeType.ALL})
-    private List<hytHouseType> imgs;
+    private List<HytImgs> imgs;
 
+    public List<HytImgs> getImgs() {
+        return imgs;
+    }
+
+    public void setImgs(List<HytImgs> imgs) {
+        this.imgs = imgs;
+    }
 
     public String getHouseOrderNumber() {
         return houseOrderNumber;

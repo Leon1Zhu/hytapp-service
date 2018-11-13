@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "hyt_imgs")
+@Table(name = "hyt_house_imgs")
 public class HytImgs {
 
     private static final long serialVersionUID = 1L;
@@ -16,7 +16,7 @@ public class HytImgs {
     @Column(name = "imgs_id")
     private String imgsId;
 
-    @Column(name = "house_id")
+    @Column(name = "hyt_house_id")
     private String houseId;
 
     @Column(name = "imgs_url")
