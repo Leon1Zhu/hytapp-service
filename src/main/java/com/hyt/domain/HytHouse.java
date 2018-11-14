@@ -86,6 +86,8 @@ public class HytHouse {
         return imgs;
     }
 
+
+
     public void setImgs(List<HytImgs> imgs) {
         this.imgs = imgs;
     }
