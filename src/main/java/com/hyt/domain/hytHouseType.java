@@ -39,6 +39,17 @@ public class hytHouseType {
     @Column(name = "type_label")
     private String typeLabel;
 
+    @Column(name = "type_price")
+    private String typePrice;
+
+    public String getTypePrice() {
+        return typePrice;
+    }
+
+    public void setTypePrice(String typePrice) {
+        this.typePrice = typePrice;
+    }
+
     public String getId() {
         return id;
     }
