@@ -10,7 +10,6 @@ public class HytImgs {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     @Column(name = "imgs_id")

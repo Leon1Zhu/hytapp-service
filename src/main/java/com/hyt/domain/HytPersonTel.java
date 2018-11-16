@@ -1,6 +1,8 @@
 package com.hyt.domain;
 
 import javax.persistence.*;
+import javax.xml.crypto.Data;
+import java.util.Date;
 
 @Entity
 @Table(name = "hyt_person_tel")
@@ -8,18 +10,17 @@ public class HytPersonTel {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
 
     @Column(name = "tel_origin")
-    private Boolean telOrigin;
+    private String telOrigin;
 
     @Column(name = "tel_number")
-    private Boolean telNumber;
+    private String telNumber;
 
     @Column(name = "tel_time")
-    private Boolean temTime;
+    private Date telTime;
 
     @ManyToOne
     @JoinColumn(name = "tel_house",referencedColumnName = "id")
@@ -33,28 +34,28 @@ public class HytPersonTel {
         this.id = id;
     }
 
-    public Boolean getTelOrigin() {
+    public String getTelOrigin() {
         return telOrigin;
     }
 
-    public void setTelOrigin(Boolean telOrigin) {
+    public void setTelOrigin(String telOrigin) {
         this.telOrigin = telOrigin;
     }
 
-    public Boolean getTelNumber() {
+    public String getTelNumber() {
         return telNumber;
     }
 
-    public void setTelNumber(Boolean telNumber) {
+    public void setTelNumber(String telNumber) {
         this.telNumber = telNumber;
     }
 
-    public Boolean getTemTime() {
-        return temTime;
+    public Date getTemTime() {
+        return telTime;
     }
 
-    public void setTemTime(Boolean temTime) {
-        this.temTime = temTime;
+    public void setTemTime(Date temTime) {
+        this.telTime = temTime;
     }
 
     public HytHouse getHytHouse() {
