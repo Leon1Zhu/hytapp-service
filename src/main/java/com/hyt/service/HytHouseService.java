@@ -45,8 +45,9 @@ public class HytHouseService {
     }
 
     public String pjSql(String sql, JSONObject obj) {
-        if (!(null == obj.getJSONObject("houseName"))) {
-            sql += "  AND a.`house_name` = '"+obj.getJSONObject("houseName").getString("data")+"' ";
+        System.out.println();
+        if (!(null == obj.getString("houseName") || "".equals( obj.getString("houseName")))) {
+            sql += "  AND a.`house_name` = '"+obj.getString("houseName")+"' ";
         }
 
         if (!(null== obj.getJSONObject("regin"))) {
@@ -54,7 +55,12 @@ public class HytHouseService {
         }
 
         if (!(null == obj.getJSONObject("building_type"))) {
-            sql += "  AND a.`building_type` like '%"+obj.getJSONObject("building_type").getString("data")+"%' ";
+            String build_type = obj.getJSONObject("building_type").getString("data");
+            if ("优质房源".equals(build_type)) {
+                sql += "  AND a.`is_highquality` = 1 ";
+            } else {
+                sql += "  AND a.`building_type` like '%"+build_type+"%' ";
+            }
         }
 
         if (!(null == obj.getJSONObject("house_type"))) {
