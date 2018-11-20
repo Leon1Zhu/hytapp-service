@@ -13,16 +13,16 @@ public class HytSubscribe {
 
 
     @Column(name = "person_name")
-    private Boolean personName;
+    private String personName;
 
     @Column(name = "person_tel")
-    private Boolean personTel;
+    private String personTel;
 
     @Column(name = "type")
-    private Boolean type;
+    private String type;
 
     @Column(name = "origin")
-    private Boolean origin;
+    private String origin;
 
     @Column(name = "order_time")
     private Date orderTime;
@@ -39,35 +39,35 @@ public class HytSubscribe {
         this.id = id;
     }
 
-    public Boolean getPersonName() {
+    public String getPersonName() {
         return personName;
     }
 
-    public void setPersonName(Boolean personName) {
+    public void setPersonName(String personName) {
         this.personName = personName;
     }
 
-    public Boolean getPersonTel() {
+    public String getPersonTel() {
         return personTel;
     }
 
-    public void setPersonTel(Boolean personTel) {
+    public void setPersonTel(String personTel) {
         this.personTel = personTel;
     }
 
-    public Boolean getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Boolean type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public Boolean getOrigin() {
+    public String getOrigin() {
         return origin;
     }
 
-    public void setOrigin(Boolean origin) {
+    public void setOrigin(String origin) {
         this.origin = origin;
     }
 

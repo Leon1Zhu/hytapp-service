@@ -46,30 +46,6 @@ public class SubscribeUserService {
         return subscribeUserRepository.findUserByProNameOrderBySubscribeTimeDesc(proName,pageable);
     }
 
-    public List findServerUserCount(String proName) {
-        String last7 = "", pre1 = "";
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar lastDate = Calendar.getInstance();
-        lastDate.roll(Calendar.DATE, -7);//日期回滚7天
-        last7 = sdf.format(lastDate.getTime());
-        System.out.println(last7);
 
-        lastDate.roll(Calendar.DATE, 8);//日期回滚7天
-        pre1 = getPreData(7);
-        System.out.println(pre1);
-        String sql = "SELECT  a.*,COUNT(*) AS usercount FROM subscribe_user a  WHERE a.`subscribe_time`<='"+pre1+"' AND a.pro_name = '"+proName+"' AND a.`subscribe_time`>= '"+last7+"'   GROUP BY DATE_FORMAT(a.`subscribe_time`,'%Y-%m-%d')";
-        List list = jdbcTemplate.queryForList(sql);
-        return list;
-    }
-
-
-    public static String getPreData(int past) {
-                 Calendar calendar = Calendar.getInstance();
-                 calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) +past);
-                 Date today = calendar.getTime();
-                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                 String result = format.format(today);
-                 return result;
-             }
 
 }

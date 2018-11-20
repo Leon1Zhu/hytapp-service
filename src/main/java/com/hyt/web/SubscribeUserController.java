@@ -46,15 +46,4 @@ public class SubscribeUserController {
       }
     }
 
-    @GetMapping("/subscribe-get-chart-count")
-    public ResponseEntity getchartCount(@RequestParam String proName){
-        List list = subscribeUserService.findServerUserCount(proName);
-      try {
-        return ResponseEntity.ok().body(list);
-      }catch (Exception e){
-        e.printStackTrace();
-        ExecResult er=new ExecResult(false,e.getMessage());
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(er);
-      }
-    }
 }

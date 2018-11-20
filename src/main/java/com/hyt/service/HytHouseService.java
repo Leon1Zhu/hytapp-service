@@ -82,4 +82,8 @@ public class HytHouseService {
     public Page searchGoodHouse(Pageable pageable) {
         return hytHouseRepository.findByIsRecommend(true, pageable);
     }
+
+    public List<HytHouse> getAllHouse() {
+        return hytHouseRepository.findAll();
+    }
 }
