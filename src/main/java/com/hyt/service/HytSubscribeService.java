@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class HytSubscribeService {
@@ -79,6 +80,30 @@ public class HytSubscribeService {
         String result = format.format(cal.getTime());
         System.out.println(result);
         return result;
+    }
+
+    public HytSubscribe addSubscribe(String phone, String name , String houseId, String type, String origin) throws Exception{
+        HytHouse hytHouse = hytHouseRepository.findOne(houseId);
+        if (hytHouse == null) {
+            throw new Exception("没有该楼盘信息");
+        }
+        HytSubscribe hytSubscribe = hytSubscribeRepository.findHytSubscribeByPersonNameAndPersonTelAndHytHouseAndType(name, phone, hytHouse, type);
+        System.out.println(name);
+        System.out.println(phone);
+        System.out.println(hytSubscribe);
+        if (hytSubscribe != null) {
+            throw new Exception("您已经预约过该楼盘啦");
+        }
+
+        hytSubscribe = new HytSubscribe();
+        hytSubscribe.setHytHouse(hytHouse);
+        hytSubscribe.setOrigin(origin);
+        hytSubscribe.setPersonName(name);
+        hytSubscribe.setPersonTel(phone);
+        hytSubscribe.setType(type);
+        hytSubscribe.setOrderTime(new Date());
+        hytSubscribe.setId(UUID.randomUUID().toString());
+        return hytSubscribeRepository.save(hytSubscribe);
     }
 
 }

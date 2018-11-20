@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -53,6 +54,17 @@ public class HytSubscribeController {
         List list = hytSubscribeService.findServerUserCount();
         try {
             return ResponseEntity.ok().body(list);
+        }catch (Exception e){
+            e.printStackTrace();
+            ExecResult er=new ExecResult(false,e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(er);
+        }
+    }
+
+    @PostMapping("/addSubscribe")
+    public ResponseEntity addSubscribe(@RequestParam String phone,@RequestParam String name,@RequestParam String proId, @RequestParam String type, @RequestParam String origin){
+        try {
+            return ResponseEntity.ok().body(hytSubscribeService.addSubscribe(phone,name, proId, type, origin));
         }catch (Exception e){
             e.printStackTrace();
             ExecResult er=new ExecResult(false,e.getMessage());

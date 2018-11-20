@@ -31,7 +31,7 @@ public class HytPersonTelService {
        hytPersonTel.setTelNumber(telNumber);
        hytPersonTel.setTelOrigin(telOrigin);
        hytPersonTel.setTemTime(telTime);
-       hytPersonTel.setId( UUID.randomUUID().toString());
+       hytPersonTel.setId(UUID.randomUUID().toString());
        return hytPersonTelRepository.save(hytPersonTel);
     }
 
