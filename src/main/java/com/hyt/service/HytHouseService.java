@@ -45,9 +45,8 @@ public class HytHouseService {
     }
 
     public String pjSql(String sql, JSONObject obj) {
-        System.out.println();
         if (!(null == obj.getString("houseName") || "".equals( obj.getString("houseName")))) {
-            sql += "  AND a.`house_name` = '"+obj.getString("houseName")+"' ";
+            sql += "  AND a.`house_name` like '%"+obj.getString("houseName")+"%' ";
         }
 
         if (!(null== obj.getJSONObject("regin"))) {

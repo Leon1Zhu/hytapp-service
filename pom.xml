@@ -5,7 +5,7 @@
 
 	<groupId>com.hyt</groupId>
 	<artifactId>hytapp</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>service</version>
 	<packaging>jar</packaging>
 
 	<name>hytApi</name>

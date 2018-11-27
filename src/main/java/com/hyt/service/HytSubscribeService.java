@@ -88,9 +88,6 @@ public class HytSubscribeService {
             throw new Exception("没有该楼盘信息");
         }
         HytSubscribe hytSubscribe = hytSubscribeRepository.findHytSubscribeByPersonNameAndPersonTelAndHytHouseAndType(name, phone, hytHouse, type);
-        System.out.println(name);
-        System.out.println(phone);
-        System.out.println(hytSubscribe);
         if (hytSubscribe != null) {
             throw new Exception("您已经预约过该楼盘啦");
         }
@@ -103,6 +100,11 @@ public class HytSubscribeService {
         hytSubscribe.setType(type);
         hytSubscribe.setOrderTime(new Date());
         hytSubscribe.setId(UUID.randomUUID().toString());
+        if ("预约看房".equals(type)) {
+            int orderNumber= Integer.parseInt(hytHouse.getHouseOrderNumber());
+            hytHouse.setHouseOrderNumber(String.valueOf(orderNumber + 1));
+            hytHouseRepository.save(hytHouse);
+        }
         return hytSubscribeRepository.save(hytSubscribe);
     }
 
