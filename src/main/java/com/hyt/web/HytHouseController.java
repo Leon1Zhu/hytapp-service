@@ -8,8 +8,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
@@ -88,4 +92,28 @@ public class HytHouseController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(er);
         }
     }
+
+    @PostMapping("/upload")
+    public ResponseEntity upload(@RequestParam("file") MultipartFile fileUpload){
+        System.out.println(fileUpload);
+        //获取文件名
+        String fileName = fileUpload.getOriginalFilename();
+//        //获取文件后缀名
+//        String suffixName = fileName.substring(fileName.lastIndexOf("."));
+//        //重新生成文件名
+//        fileName = UUID.randomUUID()+suffixName;
+        //指定本地文件夹存储图片
+        String filePath = "C:/dummyPath/";
+        try {
+            //将图片保存到static文件夹里
+            fileUpload.transferTo(new File(filePath+fileName));
+            return ResponseEntity.ok().body(filePath + fileName);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            ExecResult er = new ExecResult(false,e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(er);
+        }
+    }
+
 }
