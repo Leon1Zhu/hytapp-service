@@ -8,4 +8,6 @@ import org.springframework.stereotype.Service;
 public class HytImgsService {
     @Autowired
     private HytImgsRepository hytImgsRepository;
+
+    public deleteImg
 }
