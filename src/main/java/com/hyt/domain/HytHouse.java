@@ -72,6 +72,12 @@ public class HytHouse {
     @Column(name = "house_order_number")
     private String houseOrderNumber;
 
+    @Column(name = "redpacket")
+    private String redpacket;
+
+    @Column(name = "redpacket_desc")
+    private String redpacketDesc;
+
     @OneToMany(cascade = {CascadeType.ALL})
     private List<HytHouseAdvantage> Advantage;
 
@@ -85,7 +91,21 @@ public class HytHouse {
         return imgs;
     }
 
+    public String getRedpacket() {
+        return redpacket;
+    }
 
+    public void setRedpacket(String redpacket) {
+        this.redpacket = redpacket;
+    }
+
+    public String getRedpacketDesc() {
+        return redpacketDesc;
+    }
+
+    public void setRedpacketDesc(String redpacketDesc) {
+        this.redpacketDesc = redpacketDesc;
+    }
 
     public void setImgs(List<HytImgs> imgs) {
         this.imgs = imgs;
