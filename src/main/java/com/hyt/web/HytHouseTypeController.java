@@ -1,6 +1,6 @@
 package com.hyt.web;
 
-import com.hyt.service.HytImgsService;
+import com.hyt.service.HytHouseTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,19 +11,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-public class HytImgsController {
+public class HytHouseTypeController {
     @Autowired
-    private HytImgsService hytImgsService;
-
-    @PostMapping("/deleteImgs")
-    public ResponseEntity deleteImgs( @RequestParam String id) {
+    private HytHouseTypeService hytHouseTypeService;
+    @PostMapping("/deleteTypeById")
+    public ResponseEntity deleteTypeById(@RequestParam String id) {
         try {
-          hytImgsService.deleteImg(id);
-          return ResponseEntity.ok().body(false);
+            hytHouseTypeService.deleteHouseType(id);
+            return ResponseEntity.ok().body(false);
 
         }catch (Exception e){
             e.printStackTrace();
-            ExecResult er = new ExecResult(false, "图片删除失败");
+            ExecResult er = new ExecResult(false, "户型删除失败");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(er);
         }
     }

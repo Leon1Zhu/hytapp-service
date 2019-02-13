@@ -9,5 +9,7 @@ public class HytImgsService {
     @Autowired
     private HytImgsRepository hytImgsRepository;
 
-    public deleteImg
+    public void deleteImg(String imgId) throws Exception{
+       hytImgsRepository.deleteById(imgId);
+    }
 }

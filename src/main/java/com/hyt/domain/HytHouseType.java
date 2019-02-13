@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "hyt_house_type")
-public class hytHouseType {
+public class HytHouseType {
     private static final long serialVersionUID = 1L;
 
     @Id

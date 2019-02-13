@@ -1,10 +1,10 @@
 package com.hyt.repository;
 
-import com.hyt.domain.HytImgs;
+import com.hyt.domain.HytHouseType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface HytImgsRepository  extends JpaRepository<HytImgs , String>{
-  void deleteById(String id);
+public interface HytHouseTypeRepository extends JpaRepository<HytHouseType, String> {
+    void deleteById(String id);
 }
