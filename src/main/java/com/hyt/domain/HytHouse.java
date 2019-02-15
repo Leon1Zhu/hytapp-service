@@ -171,7 +171,7 @@ public class HytHouse {
     }
 
     public void setLike(Boolean like) {
-        like = like;
+        this.like = like;
     }
 
     public Boolean getHighquality() {

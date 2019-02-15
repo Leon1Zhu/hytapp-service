@@ -11,8 +11,10 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class HytHouseService {
@@ -85,6 +87,15 @@ public class HytHouseService {
     }
 
     public List<HytHouse> getAllHouse() {
-        return hytHouseRepository.findAll();
+        return hytHouseRepository.findAllByOrderByCreateTime();
+    }
+
+    public HytHouse addNewHouse(HytHouse hytHouse) {
+        hytHouse.setId(UUID.randomUUID().toString());
+        hytHouse.setOpenTime(new Date());
+        hytHouse.setCreateTime(new Date());
+        hytHouse.setRedpacket("2000元");
+        hytHouse.setRedpacketDesc("优惠信息请致电售楼部咨询");
+        return hytHouseRepository.save(hytHouse);
     }
 }

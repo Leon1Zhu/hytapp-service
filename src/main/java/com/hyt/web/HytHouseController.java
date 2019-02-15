@@ -1,6 +1,7 @@
 package com.hyt.web;
 
 import com.alibaba.fastjson.JSONObject;
+import com.hyt.domain.HytHouse;
 import com.hyt.service.HytHouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.xml.ws.Response;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Map;
@@ -95,7 +97,6 @@ public class HytHouseController {
 
     @PostMapping("/upload")
     public ResponseEntity upload(@RequestParam("file") MultipartFile fileUpload){
-        System.out.println(fileUpload);
         //获取文件名
         String fileName = fileUpload.getOriginalFilename();
 //        //获取文件后缀名
@@ -108,6 +109,19 @@ public class HytHouseController {
             //将图片保存到static文件夹里
             fileUpload.transferTo(new File(filePath+fileName));
             return ResponseEntity.ok().body(filePath + fileName);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            ExecResult er = new ExecResult(false,e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(er);
+        }
+    }
+
+    @PostMapping("/addNewHouse")
+    public ResponseEntity addNewHouse(@RequestBody HytHouse hytHouse1) {
+        try {
+            System.out.println(hytHouse1);
+            return ResponseEntity.ok().body(hytHouseService.addNewHouse(hytHouse1));
 
         }catch (Exception e){
             e.printStackTrace();
