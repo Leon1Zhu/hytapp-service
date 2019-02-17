@@ -34,7 +34,7 @@ public class HytImgsController {
 
         }catch (Exception e){
             e.printStackTrace();
-            ExecResult er = new ExecResult(false, "图片删除失败");
+            ExecResult er = new ExecResult(false, "图片增加失败");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(er);
         }
     }

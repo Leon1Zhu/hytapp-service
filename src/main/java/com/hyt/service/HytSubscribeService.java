@@ -78,7 +78,6 @@ public class HytSubscribeService {
         cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String result = format.format(cal.getTime());
-        System.out.println(result);
         return result;
     }
 

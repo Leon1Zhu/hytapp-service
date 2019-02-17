@@ -120,8 +120,20 @@ public class HytHouseController {
     @PostMapping("/addNewHouse")
     public ResponseEntity addNewHouse(@RequestBody HytHouse hytHouse1) {
         try {
-            System.out.println(hytHouse1);
             return ResponseEntity.ok().body(hytHouseService.addNewHouse(hytHouse1));
+
+        }catch (Exception e){
+            e.printStackTrace();
+            ExecResult er = new ExecResult(false,e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(er);
+        }
+    }
+
+    @PostMapping("/deleteHouse")
+    public ResponseEntity deleteHouse(@RequestParam String houseId) {
+        try {
+            hytHouseService.deleteHouse(houseId);
+            return ResponseEntity.ok().body(true);
 
         }catch (Exception e){
             e.printStackTrace();

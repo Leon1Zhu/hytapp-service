@@ -6,6 +6,7 @@ cors:
     exposed-headers:
     allow-credentials: true
     max-age: 1800
+imgPath: "C:/dummyPath"
 spring:
   jpa:
     show-sql: true
